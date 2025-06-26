@@ -6,6 +6,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import uce.edu.web.api.repository.model.Profesor;
 
+import java.util.List;
+
 @Transactional
 @ApplicationScoped
 public class ProfesorRepositoryImpl implements IProfesorRepository {
@@ -18,5 +20,10 @@ public class ProfesorRepositoryImpl implements IProfesorRepository {
         return this.entityManager.find(Profesor.class, id);
     }
 
-
+    @Override
+    public List<Profesor> seleccionarTodos() {
+        return this.entityManager
+                .createQuery("select p from Profesor p", Profesor.class)
+                .getResultList();
+    }
 }
