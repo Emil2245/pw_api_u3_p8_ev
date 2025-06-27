@@ -8,7 +8,7 @@ import uce.edu.web.api.repository.model.Estudiante;
 import java.util.List;
 
 @ApplicationScoped
-public class EstudianteServiceImpl  implements  IEstudianteService{
+public class EstudianteServiceImpl implements IEstudianteService {
     @Inject
     private IEstudianteRepository iEstudianteRepository;
 
@@ -20,5 +20,26 @@ public class EstudianteServiceImpl  implements  IEstudianteService{
     @Override
     public List<Estudiante> buscarTodos() {
         return this.iEstudianteRepository.seleccionarTodos();
+    }
+
+    @Override
+    public void guardar(Estudiante estudiante) {
+        this.iEstudianteRepository.insertar(estudiante);
+    }
+
+    @Override
+    public void actualizarPorId(Estudiante estudiante) {
+        this.iEstudianteRepository.actualizarPorId(estudiante);
+    }
+
+    @Override
+    public void actualizarParcialPorId(Estudiante estudiante) {
+        this.iEstudianteRepository.actualizarParcialPorId(estudiante);
+    }
+
+    @Override
+    public void borrarPorId(Integer id) {
+        this.iEstudianteRepository.eliminarPorId(id);
+
     }
 }

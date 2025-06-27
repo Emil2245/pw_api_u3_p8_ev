@@ -11,6 +11,7 @@ public interface IEstudianteRepository {
     Estudiante seleccionarEstudianteId(Integer id);
     List<Estudiante> seleccionarTodos();
     void insertar(Estudiante estudiante);
-    void actualizar(Estudiante estudiante, Integer id);
-    void eliminar(Integer id);
+    void actualizarPorId(Estudiante estudiante);
+    void actualizarParcialPorId(Estudiante estudiante);
+    void eliminarPorId(Integer id);
 }

@@ -33,13 +33,18 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
     }
 
     @Override
-    public void actualizar(Estudiante estudiante, Integer id) {
+    public void actualizarPorId(Estudiante estudiante) {
         this.entityManager.merge(estudiante);
     }
 
     @Override
-    public void eliminar(Integer id) {
-        this.entityManager.remove(this.entityManager.find(Estudiante.class, id));
+    public void actualizarParcialPorId(Estudiante estudiante) {
+        this.entityManager.merge(estudiante);
+    }
+
+    @Override
+    public void eliminarPorId(Integer id) {
+        this.entityManager.remove(this.seleccionarEstudianteId(id));
     }
 
 
