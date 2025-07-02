@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface IEstudianteRepository {
     Estudiante seleccionarEstudianteId(Integer id);
-    List<Estudiante> seleccionarTodos();
+//    List<Estudiante> seleccionarTodos();
+    List<Estudiante> seleccionarTodos(String genero);
     void insertar(Estudiante estudiante);
     void actualizarPorId(Estudiante estudiante);
     void actualizarParcialPorId(Estudiante estudiante);

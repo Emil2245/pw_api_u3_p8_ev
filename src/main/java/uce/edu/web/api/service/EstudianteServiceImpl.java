@@ -17,9 +17,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
         return iEstudianteRepository.seleccionarEstudianteId(id);
     }
 
+//    @Override
+//    public List<Estudiante> buscarTodos() {
+//        return this.iEstudianteRepository.seleccionarTodos();
+//    }
     @Override
-    public List<Estudiante> buscarTodos() {
-        return this.iEstudianteRepository.seleccionarTodos();
+    public List<Estudiante> buscarTodos(String genero) {
+        return this.iEstudianteRepository.seleccionarTodos(genero);
     }
 
     @Override

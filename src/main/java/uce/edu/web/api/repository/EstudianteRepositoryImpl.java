@@ -21,9 +21,16 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
         return this.entityManager.find(Estudiante.class, id);
     }
 
+//    @Override
+//    public List<Estudiante> seleccionarTodos() {
+//        TypedQuery<Estudiante> query = this.entityManager.createQuery("select e from Estudiante e", Estudiante.class);
+//        return query.getResultList();
+//    }
     @Override
-    public List<Estudiante> seleccionarTodos() {
-        TypedQuery<Estudiante> query = this.entityManager.createQuery("select e from Estudiante e", Estudiante.class);
+    public List<Estudiante> seleccionarTodos(String genero) {
+        TypedQuery<Estudiante> query = this.entityManager
+                .createQuery("select e from Estudiante e where e.genero = :genero", Estudiante.class);
+        query.setParameter("genero", genero);
         return query.getResultList();
     }
 
