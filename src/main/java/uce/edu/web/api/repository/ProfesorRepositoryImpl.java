@@ -21,6 +21,26 @@ public class ProfesorRepositoryImpl implements IProfesorRepository {
     }
 
     @Override
+    public void insertar(Profesor profesor) {
+        this.entityManager.persist(profesor);
+    }
+
+    @Override
+    public void actualizarPorId(Profesor profesor) {
+        this.entityManager.merge(profesor);
+    }
+
+    @Override
+    public void actualizarParcialPorId(Profesor profesor) {
+        this.entityManager.merge(profesor);
+    }
+
+    @Override
+    public void eliminarPorId(Integer id) {
+        this.entityManager.remove(this.seleccionarProfesorId(id));
+    }
+
+    @Override
     public List<Profesor> seleccionarTodos() {
         return this.entityManager
                 .createQuery("select p from Profesor p", Profesor.class)

@@ -9,4 +9,8 @@ public interface IProfesorRepository {
     public Profesor seleccionarProfesorId(Integer id);
 
     List<Profesor> seleccionarTodos();
+    void insertar(Profesor profesor);
+    void actualizarPorId(Profesor profesor);
+    void actualizarParcialPorId(Profesor profesor);
+    void eliminarPorId(Integer id);
 }
