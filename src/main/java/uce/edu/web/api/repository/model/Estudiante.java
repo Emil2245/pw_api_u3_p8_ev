@@ -1,9 +1,12 @@
 package uce.edu.web.api.repository.model;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.LocalDateTime;
 
+@XmlRootElement
 @Entity
 @Table(name = "estudiante")
 public class Estudiante {
@@ -11,14 +14,19 @@ public class Estudiante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "estu-id")
     private Integer id;
+
     @Column(name = "estu-nombre")
     private String nombre;
+
     @Column(name = "estu-apellido")
     private String apellido;
+
     @Column(name = "estu-fecha-nacimiento")
     private LocalDateTime fechaNacimiento;
+
     @Column(name = "estu-genero")
     private String genero;
+
 
     //////////////////
 
@@ -48,6 +56,7 @@ public class Estudiante {
         this.apellido = apellido;
     }
 
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     public LocalDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
