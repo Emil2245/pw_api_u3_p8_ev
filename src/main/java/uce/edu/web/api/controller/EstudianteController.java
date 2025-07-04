@@ -2,12 +2,16 @@ package uce.edu.web.api.controller;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import uce.edu.web.api.repository.model.Estudiante;
+import uce.edu.web.api.repository.model.Hijo;
 import uce.edu.web.api.service.IEstudianteService;
+import uce.edu.web.api.service.to.EstudianteTO;
 
 import java.util.List;
 
@@ -21,8 +25,11 @@ public class EstudianteController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Consultar Estudiante", description = "Este endpoint/capacidad permite buscar un estudiante")
-    public Response consultarEstudianteId(@PathParam("id") Integer id) {
-        return Response.status(200).entity(this.iEstudianteService.buscarEsudianteId(id)).build();
+    public Response consultarEstudianteId(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
+
+        return Response.status(200)
+                .entity(this.iEstudianteService.buscarEsudianteId(id, uriInfo))
+                .build();
     }
 
 //    @GET
@@ -50,34 +57,34 @@ public class EstudianteController {
         return Response.status(Response.Status.CREATED).build();
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{id}")
-    public Response actualizar(@RequestBody Estudiante estudiante, @PathParam("id") Integer id) {
-        estudiante.setId(id);
-        Estudiante actual = this.iEstudianteService.buscarEsudianteId(id);
-        if(actual==null) return Response.status(Response.Status.NOT_FOUND).build();
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("/{id}")
+//    public Response actualizar(@RequestBody Estudiante estudiante, @PathParam("id") Integer id) {
+//        estudiante.setId(id);
+//        Estudiante actual = this.iEstudianteService.buscarEsudianteId(id);
+//        if (actual == null) return Response.status(Response.Status.NOT_FOUND).build();
+//
+//        this.iEstudianteService.actualizarPorId(actual);
+//        return Response.ok().build();
+//    }
 
-        this.iEstudianteService.actualizarPorId(actual);
-        return Response.ok().build();
-    }
-
-    @PATCH
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{id}")
-    public Response actualizarParcial(@RequestBody Estudiante estudiante, @PathParam("id") Integer id) {
-        Estudiante actual = this.iEstudianteService.buscarEsudianteId(id);
-        if(actual==null) return Response.status(Response.Status.NOT_FOUND).build();
-
-        if (estudiante.getApellido() != null) actual.setApellido(estudiante.getApellido());
-        if (estudiante.getFechaNacimiento() != null) actual.setFechaNacimiento(estudiante.getFechaNacimiento());
-        if (estudiante.getNombre() != null) actual.setNombre(estudiante.getNombre());
-        this.iEstudianteService.actualizarParcialPorId(actual);
-
-        return Response.ok().build();
-    }
+//    @PATCH
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("/{id}")
+//    public Response actualizarParcial(@RequestBody Estudiante estudiante, @PathParam("id") Integer id, @Context UriInfo uriInfo) {
+//        EstudianteTO actual = this.iEstudianteService.buscarEsudianteId(id, uriInfo);
+//        if (actual == null) return Response.status(Response.Status.NOT_FOUND).build();
+//
+//        if (estudiante.getApellido() != null) actual.setApellido(estudiante.getApellido());
+//        if (estudiante.getFechaNacimiento() != null) actual.setFechaNacimiento(estudiante.getFechaNacimiento());
+//        if (estudiante.getNombre() != null) actual.setNombre(estudiante.getNombre());
+//        this.iEstudianteService.actualizarParcialPorId(actual);
+//
+//        return Response.ok().build();
+//    }
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
@@ -86,5 +93,14 @@ public class EstudianteController {
     public Response borrarPorId(@PathParam("id") Integer id) {
         this.iEstudianteService.borrarPorId(id);
         return Response.noContent().build();
+    }
+
+    @GET
+    @Path("/{id}/hijos")
+    public List<Hijo> obtenerHijosPorId(@PathParam("id") Integer id) {
+
+        return List.of(new Hijo("pepito"),
+                new Hijo("Juanito"));
+
     }
 }

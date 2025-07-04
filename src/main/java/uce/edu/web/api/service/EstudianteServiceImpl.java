@@ -2,8 +2,10 @@ package uce.edu.web.api.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.UriInfo;
 import uce.edu.web.api.repository.IEstudianteRepository;
 import uce.edu.web.api.repository.model.Estudiante;
+import uce.edu.web.api.service.to.EstudianteTO;
 
 import java.util.List;
 
@@ -13,11 +15,20 @@ public class EstudianteServiceImpl implements IEstudianteService {
     private IEstudianteRepository iEstudianteRepository;
 
     @Override
-    public Estudiante buscarEsudianteId(Integer id) {
-        return iEstudianteRepository.seleccionarEstudianteId(id);
+    public EstudianteTO buscarEsudianteId(Integer id, UriInfo uriInfo) {
+        Estudiante estudiante = iEstudianteRepository.seleccionarEstudianteId(id);
+
+        return new EstudianteTO(
+                estudiante.getId(),
+                estudiante.getNombre(),
+                estudiante.getApellido(),
+                estudiante.getFechaNacimiento(),
+                estudiante.getGenero(),
+                uriInfo
+        );
     }
 
-//    @Override
+    //    @Override
 //    public List<Estudiante> buscarTodos() {
 //        return this.iEstudianteRepository.seleccionarTodos();
 //    }
