@@ -2,8 +2,13 @@ package uce.edu.web.api.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.UriInfo;
 import uce.edu.web.api.repository.IProfesorRepository;
+import uce.edu.web.api.repository.model.Estudiante;
 import uce.edu.web.api.repository.model.Profesor;
+import uce.edu.web.api.service.to.EstudianteTO;
+import uce.edu.web.api.service.to.ProfesorTO;
 
 import java.util.List;
 
@@ -19,8 +24,18 @@ public class ProfesorServiceImpl implements IProfesorService {
     }
 
     @Override
-    public Profesor buscarProfesorId(Integer id) {
-        return iProfesorRepository.seleccionarProfesorId(id);
+    public ProfesorTO buscarProfesorId(Integer id, UriInfo uriInfo) {
+        Profesor profesor = iProfesorRepository.seleccionarProfesorId(id);
+
+        return new ProfesorTO(
+                profesor.getId(),
+                profesor.getNombre(),
+                profesor.getApellido(),
+                profesor.getEspecialidad(),
+                profesor.getEsTiempoCompleto(),
+                profesor.getFechaNacimiento(),
+                uriInfo
+        );
     }
 
     @Override
