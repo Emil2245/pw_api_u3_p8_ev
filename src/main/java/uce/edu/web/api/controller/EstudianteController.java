@@ -11,6 +11,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import uce.edu.web.api.repository.model.Estudiante;
 import uce.edu.web.api.repository.model.Hijo;
 import uce.edu.web.api.service.IEstudianteService;
+import uce.edu.web.api.service.IHijoService;
 import uce.edu.web.api.service.to.EstudianteTO;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 public class EstudianteController {
     @Inject
     private IEstudianteService iEstudianteService;
+    @Inject
+    private IHijoService iHijoService;
 
     @GET
     @Path("/consultar/{id}")
@@ -99,8 +102,8 @@ public class EstudianteController {
     @Path("/{id}/hijos")
     public List<Hijo> obtenerHijosPorId(@PathParam("id") Integer id) {
 
-        return List.of(new Hijo("pepito"),
-                new Hijo("Juanito"));
+        return this.iHijoService.buscarPorEstudianteId(id);
+
 
     }
 }
