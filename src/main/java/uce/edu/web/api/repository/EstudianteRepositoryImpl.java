@@ -1,6 +1,7 @@
 package uce.edu.web.api.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -15,6 +16,9 @@ public class EstudianteRepositoryImpl implements IEstudianteRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Inject
+    private IHijoRepository hijoRepository;
 
     @Override
     public Estudiante seleccionarEstudianteId(Integer id) {

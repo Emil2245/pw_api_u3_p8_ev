@@ -14,18 +14,24 @@ public class EstudianteServiceImpl implements IEstudianteService {
     @Inject
     private IEstudianteRepository iEstudianteRepository;
 
-    @Override
-    public EstudianteTO buscarEsudianteId(Integer id, UriInfo uriInfo) {
-        Estudiante estudiante = iEstudianteRepository.seleccionarEstudianteId(id);
+//    @Override
+//    public Estudiante buscarEsudianteId(Integer id) {
+//        Estudiante estudiante = iEstudianteRepository.seleccionarEstudianteId(id);
+//
+//        return new EstudianteTO(
+//                estudiante.getId(),
+//                estudiante.getNombre(),
+//                estudiante.getApellido(),
+//                estudiante.getFechaNacimiento(),
+//                estudiante.getGenero(),
+//                uriInfo
+//        );
+//    }
 
-        return new EstudianteTO(
-                estudiante.getId(),
-                estudiante.getNombre(),
-                estudiante.getApellido(),
-                estudiante.getFechaNacimiento(),
-                estudiante.getGenero(),
-                uriInfo
-        );
+
+    @Override
+    public Estudiante buscarEsudianteId(Integer id) {
+        return this.iEstudianteRepository.seleccionarEstudianteId(id);
     }
 
     //    @Override

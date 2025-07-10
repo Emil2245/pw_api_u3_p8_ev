@@ -95,14 +95,14 @@ public class ProfesorController {
         }
     }
 
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{id}/hijos")
-    public List<Hijo> obtenerHijosPorId(@PathParam("id") Integer id) {
-
-        return List.of(new Hijo("pepito"),
-                new Hijo("Juanito"));
-
-    }
+//    @GET
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("/{id}/hijos")
+//    public List<Hijo> obtenerHijosPorId(@PathParam("id") Integer id) {
+//
+//        return List.of(new Hijo("pepito"),
+//                new Hijo("Juanito"));
+//
+//    }
 }

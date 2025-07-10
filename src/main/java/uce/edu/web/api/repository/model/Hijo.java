@@ -1,5 +1,6 @@
 package uce.edu.web.api.repository.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,7 +18,8 @@ public class Hijo {
     @Column(name = "hijo_apellido")
     private String apellido;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hijo_estudiante")
     private Estudiante estudiante;
 

@@ -7,7 +7,7 @@ import uce.edu.web.api.service.to.EstudianteTO;
 import java.util.List;
 
 public interface IEstudianteService {
-    EstudianteTO buscarEsudianteId(Integer id, UriInfo uriInfo);
+    Estudiante buscarEsudianteId(Integer id);
 //    List<Estudiante> buscarTodos();
     List<Estudiante> buscarTodos(String genero);
     void guardar(Estudiante estudiante);

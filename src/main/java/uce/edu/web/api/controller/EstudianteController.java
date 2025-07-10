@@ -12,6 +12,7 @@ import uce.edu.web.api.repository.model.Estudiante;
 import uce.edu.web.api.repository.model.Hijo;
 import uce.edu.web.api.service.IEstudianteService;
 import uce.edu.web.api.service.IHijoService;
+import uce.edu.web.api.service.mapper.EstudianteMapper;
 import uce.edu.web.api.service.to.EstudianteTO;
 
 import java.util.List;
@@ -29,9 +30,11 @@ public class EstudianteController {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Consultar Estudiante", description = "Este endpoint/capacidad permite buscar un estudiante")
     public Response consultarEstudianteId(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
+        EstudianteTO estudianteTO = EstudianteMapper.toTO(this.iEstudianteService.buscarEsudianteId(id));
+        estudianteTO.buildURI(uriInfo);
 
         return Response.status(200)
-                .entity(this.iEstudianteService.buscarEsudianteId(id, uriInfo))
+                .entity(estudianteTO)
                 .build();
     }
 
