@@ -29,12 +29,31 @@ public class EstudianteTO {
 
     /// ///////////////////
     public void buildURI(UriInfo uriInfo) {
-        URI uri = uriInfo.getBaseUriBuilder().path(EstudianteController.class)
-                .path(EstudianteController.class,"obtenerHijosPorId").build(id);
-        _links.put("hijos", uri.toString());
+        URI uriSelf = uriInfo.getBaseUriBuilder()
+                .path(EstudianteController.class)
+                .path(EstudianteController.class, "consultarEstudianteId")
+                .build(this.id);
+        _links.put("self", uriSelf.toString());
+
+        URI uriUpdate = uriInfo.getBaseUriBuilder()
+                .path(EstudianteController.class)
+                .path(this.id.toString())
+                .build();
+        _links.put("update", uriUpdate.toString());
+
+        URI uriDelete = uriInfo.getBaseUriBuilder()
+                .path(EstudianteController.class)
+                .path(this.id.toString())
+                .build();
+        _links.put("delete", uriDelete.toString());
+
+        URI uriHijos = uriInfo.getBaseUriBuilder()
+                .path(EstudianteController.class)
+                .path(EstudianteController.class,"obtenerHijosPorId")
+                .build(id);
+        _links.put("hijos", uriHijos.toString());
+
     }
-
-
 
     //GETTERS SETTERS/ ////////////
 
