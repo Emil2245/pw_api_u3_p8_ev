@@ -3,6 +3,7 @@ package uce.edu.web.api.repository.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "profesor")
@@ -21,6 +22,9 @@ public class Profesor {
     private Boolean esTiempoCompleto;
     @Column(name = "prof-fecha-nacimiento")
     private LocalDateTime fechaNacimiento;
+
+    @OneToMany(mappedBy = "profesor")
+    private List<Alumno> alumnos;
 
     //////////////////
 
@@ -72,5 +76,13 @@ public class Profesor {
 
     public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public List<Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
     }
 }

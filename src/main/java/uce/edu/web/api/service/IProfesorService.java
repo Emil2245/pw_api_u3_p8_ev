@@ -9,8 +9,7 @@ import uce.edu.web.api.service.to.ProfesorTO;
 import java.util.List;
 
 public interface IProfesorService {
-    ProfesorTO buscarProfesorId(Integer id, @Context UriInfo uriInfo);
-
+    Profesor buscarProfesorId(Integer id);
     List<Profesor> buscarTodos();
     void guardar(Profesor profesor);
     void actualizarPorId(Profesor profesor);

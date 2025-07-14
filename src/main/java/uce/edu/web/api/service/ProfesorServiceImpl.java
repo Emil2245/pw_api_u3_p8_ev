@@ -24,18 +24,8 @@ public class ProfesorServiceImpl implements IProfesorService {
     }
 
     @Override
-    public ProfesorTO buscarProfesorId(Integer id, UriInfo uriInfo) {
-        Profesor profesor = iProfesorRepository.seleccionarProfesorId(id);
-
-        return new ProfesorTO(
-                profesor.getId(),
-                profesor.getNombre(),
-                profesor.getApellido(),
-                profesor.getEspecialidad(),
-                profesor.getEsTiempoCompleto(),
-                profesor.getFechaNacimiento(),
-                uriInfo
-        );
+    public Profesor buscarProfesorId(Integer id) {
+        return iProfesorRepository.seleccionarProfesorId(id);
     }
 
     @Override

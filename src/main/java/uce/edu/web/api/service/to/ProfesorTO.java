@@ -17,22 +17,92 @@ public class ProfesorTO {
     private String especialidad;
     private Boolean esTiempoCompleto;
     private LocalDateTime fechaNacimiento;
-    public Map<String, String> _links = new HashMap<>();
+    private Map<String, String> _links = new HashMap<>();
+    /// //////////////
 
-    public ProfesorTO(Integer id, String nombre, String apellido, String especialidad, Boolean esTiempoCompleto, LocalDateTime fechaNacimiento, UriInfo uriInfo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.especialidad = especialidad;
-        this.esTiempoCompleto = esTiempoCompleto;
-        this.fechaNacimiento = fechaNacimiento;
-
-        URI todosHijos=  uriInfo.getBaseUriBuilder()
+    //URI /////////////
+    public void buildURI (UriInfo uriInfo){
+        URI uriSelf = uriInfo.getBaseUriBuilder()
                 .path(ProfesorController.class)
-                .path(ProfesorController.class, "obtenerHijosPorId")
-                .build(id);
+                .path(ProfesorController.class,"consultarProfesorId")
+                .build(this.id);
+        _links.put("self", uriSelf.toString());
 
-        _links.put("hijos", todosHijos.toString());
+        URI uriDelete = uriInfo.getBaseUriBuilder()
+                .path(ProfesorController.class)
+                .path(this.id.toString())
+                .build();
+        _links.put("delete", uriDelete.toString());
+
+        URI uriUpdate = uriInfo.getBaseUriBuilder()
+                .path(ProfesorController.class)
+                .path(this.id.toString())
+                .build();
+        _links.put("update", uriUpdate.toString());
+
+        URI todosAlumnos=  uriInfo.getBaseUriBuilder()
+                .path(ProfesorController.class)
+                .path(ProfesorController.class, "obtenerAlumnosPorId")
+                .build(id);
+        _links.put("alumnos", todosAlumnos.toString());
+    }
+
+    //GETTERS /SETTERS /////////////////////////
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public Boolean getEsTiempoCompleto() {
+        return esTiempoCompleto;
+    }
+
+    public void setEsTiempoCompleto(Boolean esTiempoCompleto) {
+        this.esTiempoCompleto = esTiempoCompleto;
+    }
+
+    public LocalDateTime getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Map<String, String> get_links() {
+        return _links;
+    }
+
+    public void set_links(Map<String, String> _links) {
+        this._links = _links;
     }
 }
 
