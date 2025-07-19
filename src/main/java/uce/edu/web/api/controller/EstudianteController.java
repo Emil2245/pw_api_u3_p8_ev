@@ -1,11 +1,15 @@
 package uce.edu.web.api.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.ClaimValue;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import uce.edu.web.api.repository.model.Estudiante;
@@ -19,6 +23,15 @@ import java.util.List;
 
 @Path("/estudiantes")
 public class EstudianteController {
+
+    @Inject
+    JsonWebToken jwt;
+
+    @Inject
+    @Claim("sub")
+    ClaimValue<String> subject;
+
+
     @Inject
     private IEstudianteService iEstudianteService;
     @Inject
@@ -26,6 +39,7 @@ public class EstudianteController {
 
     @GET
     @Path("/consultar/{id}")
+    @RolesAllowed("admin")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Consultar Estudiante", description = "Este endpoint/capacidad permite buscar un estudiante")
